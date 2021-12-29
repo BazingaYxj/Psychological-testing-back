@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.tests.mapper.TTestInformationMapper">
+    
+    <resultMap type="TTestInformation" id="TTestInformationResult">
+        <result property="id"    column="id"    />
+        <result property="testName"    column="test_name"    />
+        <result property="testUrl"    column="test_url"    />
+        <result property="createTime"  column="create_time"  />
+    </resultMap>
+
+    <sql id="selectTTestInformationVo">
+        select id, test_name, test_url, create_time from t_test_information
+    </sql>
+
+    <select id="selectTTestInformationList" parameterType="TTestInformation" resultMap="TTestInformationResult">
+        <include refid="selectTTestInformationVo"/>
+        <where>  
+            <if test="testName != null  and testName != ''"> and test_name like concat('%', #{testName}, '%')</if>
+            <if test="testUrl != null  and testUrl != ''"> and test_url = #{testUrl}</if>
+        </where>
+    </select>
+    
+    <select id="selectTTestInformationById" parameterType="Long" resultMap="TTestInformationResult">
+        <include refid="selectTTestInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTTestInformation" parameterType="TTestInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into t_test_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="testName != null">test_name,</if>
+            <if test="testUrl != null">test_url,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="testName != null">#{testName},</if>
+            <if test="testUrl != null">#{testUrl},</if>
+            now()
+         </trim>
+    </insert>
+
+    <update id="updateTTestInformation" parameterType="TTestInformation">
+        update t_test_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="testName != null">test_name = #{testName},</if>
+            <if test="testUrl != null">test_url = #{testUrl},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTTestInformationById" parameterType="Long">
+        delete from t_test_information where id = #{id}
+    </delete>
+
+    <delete id="deleteTTestInformationByIds" parameterType="String">
+        delete from t_test_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

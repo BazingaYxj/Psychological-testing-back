@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.user.mapper.TUserInformationMapper">
+    
+    <resultMap type="TUserInformation" id="TUserInformationResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+    </resultMap>
+
+    <sql id="selectTUserInformationVo">
+        select id, username, password, age, sex from t_user_information
+    </sql>
+
+    <select id="selectTUserInformationList" parameterType="TUserInformation" resultMap="TUserInformationResult">
+        <include refid="selectTUserInformationVo"/>
+        <where>  
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+        </where>
+    </select>
+    
+    <select id="selectTUserInformationById" parameterType="Long" resultMap="TUserInformationResult">
+        <include refid="selectTUserInformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTUserInformation" parameterType="TUserInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">username,</if>
+            <if test="password != null">password,</if>
+            <if test="age != null">age,</if>
+            <if test="sex != null">sex,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">#{username},</if>
+            <if test="password != null">#{password},</if>
+            <if test="age != null">#{age},</if>
+            <if test="sex != null">#{sex},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTUserInformation" parameterType="TUserInformation">
+        update t_user_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="sex != null">sex = #{sex},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTUserInformationById" parameterType="Long">
+        delete from t_user_information where id = #{id}
+    </delete>
+
+    <delete id="deleteTUserInformationByIds" parameterType="String">
+        delete from t_user_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
