@@ -25,20 +25,6 @@
       </el-form-item>
     </el-form>
 
-    <el-row :gutter="10" class="mb8">
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          size="mini"
-          @click="handleDelete"
-          v-hasPermi="['system:scoreinformation:remove']"
-        >删除</el-button>
-      </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
-    </el-row>
-
     <el-table v-loading="loading" :data="informationList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="45" align="center" />
       <el-table-column label="" width="55" align="center">
@@ -59,7 +45,7 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:scoreinformation:remove']"
+            v-hasPermi="['system:information:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -154,16 +140,6 @@ export default {
       this.resetForm("queryForm");
       this.handleQuery();
     },
-      /** 修改按钮操作 */
-      handleUpdate(row) {
-          this.reset();
-          const id = row.id || this.ids
-          getInformation(id).then(response => {
-              this.form = response.data;
-              this.open = true;
-              this.title = "修改测试题信息";
-          });
-      },
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
