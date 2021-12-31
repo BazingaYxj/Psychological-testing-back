@@ -21,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectTScoreInformationList" parameterType="TScoreInformation" resultMap="TScoreInformationResult">
-        select u.username, u.age, u.sex, t.test_name, s.score, s.create_time from t_user_information u
-        left join t_score_information s on u.id=s.user_id
+        select s.id, u.username, u.age, u.sex, t.test_name, s.score, s.create_time from t_score_information s
+        left join t_user_information u on u.id=s.user_id
         left join t_test_information t on s.test_id=t.id
         <where>  
             <if test="username != null "> and username = #{username}</if>
