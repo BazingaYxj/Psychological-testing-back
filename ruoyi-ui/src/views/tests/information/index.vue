@@ -16,7 +16,7 @@
       </el-form-item>
     </el-form>
 
-    <el-row :gutter="10" class="mb8">
+    <el-row :gutter="10">
       <el-col :span="1.5">
         <el-button
           type="primary"
@@ -76,6 +76,7 @@
         <el-form-item label="页面地址" prop="testUrl">
           <el-input v-model="form.testUrl" placeholder="请输入测试题页面地址" />
         </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -87,11 +88,11 @@
 
 <script>
 import { listInformation, getInformation, delInformation, addInformation, updateInformation } from "@/api/tests/testsinformation";
-
 export default {
   name: "Information",
   data() {
     return {
+
       // 遮罩层
       loading: true,
       // 选中数组
@@ -116,7 +117,8 @@ export default {
         pageSize: 10,
         testName: null,
         testUrl: null,
-        createTime: null
+        createTime: null,
+        testPictureUrl: null
       },
       // 表单参数
       form: {},
@@ -143,6 +145,9 @@ export default {
       this.open = false;
       this.reset();
     },
+      uploadPicUrl: function(response) {
+          this.goods.picUrl = response.data.url
+      },
     // 表单重置
     reset() {
       this.form = {

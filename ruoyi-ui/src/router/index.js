@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import FrontView from "../views/FrontView";
 
 /**
  * Note: 路由配置项
@@ -137,7 +138,12 @@ export const constantRoutes = [
         meta: { title: '调度日志', activeMenu: '/monitor/job' }
       }
     ]
-  }
+  },
+  {
+    path: '/FrontView',
+    component: (resolve) => require(['@/views/FrontView'], resolve),
+    hidden: false
+  },
 ]
 
 export default new Router({

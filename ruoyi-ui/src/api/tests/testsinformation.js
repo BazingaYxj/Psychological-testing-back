@@ -9,6 +9,13 @@ export function listInformation(query) {
   })
 }
 
+export function uploadPath(query) {
+  return request({
+    url: '/system/testsinformation/list',
+    method: 'get',
+    params: query
+  })
+}
 // 查询【请填写功能名称】详细
 export function getInformation(id) {
   return request({
