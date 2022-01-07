@@ -3,6 +3,7 @@ package com.ruoyi.tests.service.impl;
 import java.util.List;
 
 import com.ruoyi.tests.domain.TTestInformation;
+import com.ruoyi.tests.domain.TestUrls;
 import com.ruoyi.tests.mapper.TTestInformationMapper;
 import com.ruoyi.tests.service.ITTestInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class TTestInformationServiceImpl implements ITTestInformationService
     public List<TTestInformation> selectTTestInformationList(TTestInformation tTestInformation)
     {
         return tTestInformationMapper.selectTTestInformationList(tTestInformation);
+    }
+
+    @Override
+    public List<TestUrls> selectPictureUrl(TestUrls testUrls) {
+        return tTestInformationMapper.selectPictureUrl(testUrls);
     }
 
     /**

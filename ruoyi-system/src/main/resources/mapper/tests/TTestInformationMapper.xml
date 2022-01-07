@@ -9,10 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="testName"    column="test_name"    />
         <result property="testUrl"    column="test_url"    />
         <result property="createTime"  column="create_time"  />
+        <result property="testPictureUrl" column="test_picture_url"  />
+    </resultMap>
+
+    <resultMap id="TTestInformationResults" type="TestUrls">
+        <result property="testUrl" column="test_url"   />
     </resultMap>
 
     <sql id="selectTTestInformationVo">
-        select id, test_name, test_url, create_time from t_test_information
+        select id, test_name, test_url, create_time, test_picture_url from t_test_information
     </sql>
 
     <select id="selectTTestInformationList" parameterType="TTestInformation" resultMap="TTestInformationResult">
@@ -22,7 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="testUrl != null  and testUrl != ''"> and test_url = #{testUrl}</if>
         </where>
     </select>
-    
+
+    <select id="selectPictureUrl" parameterType="TestUrls" resultMap="TTestInformationResults">
+        select test_url from t_test_information
+        <where>
+            <if test="testUrl != null  and testUrl != ''"> and test_url = #{testUrl}</if>
+        </where>
+    </select>
+
     <select id="selectTTestInformationById" parameterType="Long" resultMap="TTestInformationResult">
         <include refid="selectTTestInformationVo"/>
         where id = #{id}
@@ -33,11 +45,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="testName != null">test_name,</if>
             <if test="testUrl != null">test_url,</if>
+            <if test="testPictureUrl != null">test_picture_url</if>
             create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="testName != null">#{testName},</if>
             <if test="testUrl != null">#{testUrl},</if>
+            <if test="testPictureUrl != null">#{testPictureUrl},</if>
             now()
          </trim>
     </insert>

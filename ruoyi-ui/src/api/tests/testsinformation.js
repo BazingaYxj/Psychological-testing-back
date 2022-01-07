@@ -8,12 +8,11 @@ export function listInformation(query) {
     params: query
   })
 }
-
-export function uploadPath(query) {
+//获取测试页面地址
+export function getTestUrls(data) {
   return request({
-    url: '/system/testsinformation/list',
+    url: '/system/testsinformation/geturl',
     method: 'get',
-    params: query
   })
 }
 // 查询【请填写功能名称】详细

@@ -7,6 +7,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 
 import com.ruoyi.tests.domain.TTestInformation;
+import com.ruoyi.tests.domain.TestUrls;
 import com.ruoyi.tests.service.ITTestInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,6 +58,21 @@ public class TTestInformationController extends BaseController
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         return AjaxResult.success(tTestInformationService.selectTTestInformationById(id));
+    }
+
+    /**
+     *获取试题页面地址接口
+     *
+     * @Author yfj
+     * @Date 2022/1/6 10:30
+     * @param testUrls
+     * @return com.ruoyi.common.core.domain.AjaxResult
+     **/
+    @PreAuthorize("@ss.hasPermi('system:testsinformation:geturl')")
+    @GetMapping("/geturl")
+    public AjaxResult getUrls(TestUrls testUrls)
+    {
+        return AjaxResult.success(tTestInformationService.selectPictureUrl(testUrls));
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.ruoyi.tests.service;
 
 import com.ruoyi.tests.domain.TTestInformation;
+import com.ruoyi.tests.domain.TestUrls;
 
 import java.util.List;
 
@@ -28,6 +29,15 @@ public interface ITTestInformationService
      * @return 【请填写功能名称】集合
      */
     public List<TTestInformation> selectTTestInformationList(TTestInformation tTestInformation);
+
+    /**
+     *
+     * @Author yfj
+     * @Date 2022/1/5 11:16
+     * @param testUrls
+     * @return java.util.List<com.ruoyi.tests.domain.TTestInformation>
+     **/
+    public List<TestUrls> selectPictureUrl(TestUrls testUrls);
 
     /**
      * 新增【请填写功能名称】
