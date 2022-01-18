@@ -144,6 +144,11 @@ export const constantRoutes = [
     component: (resolve) => require(['@/views/FrontView'], resolve),
     hidden: false
   },
+  {
+    path: '/FrontViewLogin',
+    component: (resolve) => require(['@/views/FrontViewLogin'], resolve),
+    hidden: false
+  },
 ]
 
 export default new Router({

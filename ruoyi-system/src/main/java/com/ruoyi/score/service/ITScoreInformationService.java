@@ -3,6 +3,7 @@ package com.ruoyi.score.service;
 import java.util.List;
 
 import com.ruoyi.score.domain.TScoreInformation;
+import com.ruoyi.score.domain.TestPopularity;
 
 /**
  * 【请填写功能名称】Service接口
@@ -59,4 +60,16 @@ public interface ITScoreInformationService
      * @return 结果
      */
     public int deleteTScoreInformationByIds(Long[] ids);
+
+
+
+    /**
+     * 柱状图接口测试题受欢迎程度统计
+     *
+     * @Author yfj
+     * @Date 2022/1/17 11:16
+     * @param testPopularity
+     * @return java.util.List<com.ruoyi.score.domain.TScoreInformation>
+     **/
+    public List<TestPopularity> chartfordata(TestPopularity testPopularity);
 }

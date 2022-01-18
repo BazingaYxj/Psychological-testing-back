@@ -6,6 +6,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.score.domain.TScoreInformation;
+import com.ruoyi.score.domain.TestPopularity;
 import com.ruoyi.score.service.ITScoreInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ import java.util.List;
  * @date 2021-12-28
  */
 @RestController
-@RequestMapping("/system/scoreinformation")
+@RequestMapping("/score/information")
 public class TScoreInformationController extends BaseController
 {
     @Autowired
@@ -34,7 +35,7 @@ public class TScoreInformationController extends BaseController
      * @param tScoreInformation
      * @return com.ruoyi.common.core.page.TableDataInfo
      **/
-    @PreAuthorize("@ss.hasPermi('system:scoreinformation:list')")
+    @PreAuthorize("@ss.hasPermi('score:information:list')")
     @GetMapping("/list")
     public TableDataInfo list(TScoreInformation tScoreInformation)
     {
@@ -51,7 +52,7 @@ public class TScoreInformationController extends BaseController
      * @param id
      * @return com.ruoyi.common.core.domain.AjaxResult
      **/
-    @PreAuthorize("@ss.hasPermi('system:scoreinformation:query')")
+    @PreAuthorize("@ss.hasPermi('score:information:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +67,7 @@ public class TScoreInformationController extends BaseController
      * @param tScoreInformation
      * @return com.ruoyi.common.core.domain.AjaxResult
      **/
-    @PreAuthorize("@ss.hasPermi('system:scoreinformation:add')")
+    @PreAuthorize("@ss.hasPermi('score:information:add')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TScoreInformation tScoreInformation)
@@ -82,7 +83,7 @@ public class TScoreInformationController extends BaseController
      * @param tScoreInformation
      * @return com.ruoyi.common.core.domain.AjaxResult
      **/
-    @PreAuthorize("@ss.hasPermi('system:scoreinformation:edit')")
+    @PreAuthorize("@ss.hasPermi('score:information:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TScoreInformation tScoreInformation)
@@ -98,11 +99,23 @@ public class TScoreInformationController extends BaseController
      * @param ids
      * @return com.ruoyi.common.core.domain.AjaxResult
      **/
-    @PreAuthorize("@ss.hasPermi('system:scoreinformation:remove')")
+    @PreAuthorize("@ss.hasPermi('score:information:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(tScoreInformationService.deleteTScoreInformationByIds(ids));
+    }
+
+    /**
+     *
+     * @Author yfj
+     * @Date 2022/1/17 11:30
+     * @param testPopularity
+     * @return com.ruoyi.common.core.domain.AjaxResult
+     **/
+    @GetMapping("/chartone")
+    public AjaxResult chartfordatalist(TestPopularity testPopularity){
+        return AjaxResult.success(tScoreInformationService.chartfordata(testPopularity));
     }
 }

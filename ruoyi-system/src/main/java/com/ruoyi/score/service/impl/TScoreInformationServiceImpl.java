@@ -3,6 +3,7 @@ package com.ruoyi.score.service.impl;
 import java.util.List;
 
 import com.ruoyi.score.domain.TScoreInformation;
+import com.ruoyi.score.domain.TestPopularity;
 import com.ruoyi.score.mapper.TScoreInformationMapper;
 import com.ruoyi.score.service.ITScoreInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +91,17 @@ public class TScoreInformationServiceImpl implements ITScoreInformationService
     public int deleteTScoreInformationById(Long id)
     {
         return tScoreInformationMapper.deleteTScoreInformationById(id);
+    }
+
+    /**
+     *
+     * @Author yfj
+     * @Date 2022/1/17 11:18
+     * @param testPopularity
+     * @return java.util.List<com.ruoyi.score.domain.TScoreInformation>
+     **/
+    @Override
+    public List<TestPopularity> chartfordata(TestPopularity testPopularity) {
+        return tScoreInformationMapper.chartfordata(testPopularity);
     }
 }

@@ -8,6 +8,14 @@ export function listInformation(query) {
     params: query
   })
 }
+// 查询【请填写功能名称】列表
+export function frontLogin(data) {
+  return request({
+    url: '/front/login',
+    method: 'get',
+    params: data
+  })
+}
 
 // 查询【请填写功能名称】详细
 export function getInformation(id) {

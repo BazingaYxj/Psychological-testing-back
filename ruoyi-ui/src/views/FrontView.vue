@@ -41,15 +41,4 @@
 
   }
 
-  /*.main{
-    position: absolute;
-    top: 50px;
-    left: 250px;
-    bottom: 0px;
-    right: 0px;
-    padding: 10px;
-    overflow-y: auto;!*内容过多出现滚动条*!
-
-  }*/
-
 </style>
